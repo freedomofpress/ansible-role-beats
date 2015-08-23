@@ -1,0 +1,8 @@
+---
+- name: install logstash-forwarder config file
+  template:
+    src: logstash-forwarder.conf
+    dest: /etc/logstash-forwarder.conf
+    mode: "0644"
+    owner: root
+    group: root
