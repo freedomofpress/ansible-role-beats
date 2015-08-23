@@ -1,2 +1,5 @@
 ---
 # defaults file for logstash-client
+ssl_certificate_base_directory: /etc/pki/tls/certs
+ssl_certificate_basename: logstash-client
+logstash_forwarder_certificate_fullpath: "{{ ssl_certificate_base_directory }}/{{ ssl_certificate_basename }}"
