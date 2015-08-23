@@ -1,2 +1,6 @@
 ---
 # handlers file for logstash-client
+- name: restart logstash-forwarder
+  service:
+    name: logstash-forwarder
+    state: restarted

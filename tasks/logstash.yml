@@ -6,3 +6,5 @@
     mode: "0644"
     owner: root
     group: root
+  notify: restart logstash-forwarder
+
