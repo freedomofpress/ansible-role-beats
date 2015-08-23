@@ -1,2 +1,3 @@
 ---
+- include: packages.yml
 - include: ssl_keys.yml
