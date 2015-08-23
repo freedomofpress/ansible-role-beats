@@ -1,0 +1,19 @@
+---
+# tasks file for logstash-client
+- name: ensure certificate directory exists
+  file:
+    path: "{{ ssl_certificate_base_directory }}"
+    mode: "0755"
+    owner: root
+    group: root
+    state: directory
+
+- name: copy logstash-forwarder certificate
+  copy:
+    dest: "{{ ssl_certificate_base_directory }}/"
+    src: "files/{{ ssl_certificate_basename }}.crt"
+    mode: "0644"
+    owner: root
+    group: root
+
+
