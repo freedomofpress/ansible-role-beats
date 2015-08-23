@@ -2,14 +2,14 @@
 # tasks file for logstash-client
 - name: ensure certificate directory exists
   file:
-    path: /etc/pki/logstash
+    path: /etc/pki/ssl/certs
     mode: "0755"
     owner: root
     group: root
 
 - name: copy logstash-forwarder certificate
   copy:
-    dest: /etc/pki/logstash/
+    dest: /etc/pki/ssl/certs/
     src: logstash-client.crt
     mode: "0644"
     owner: root
