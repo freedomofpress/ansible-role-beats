@@ -6,11 +6,12 @@
     mode: "0755"
     owner: root
     group: root
+    state: directory
 
 - name: copy logstash-forwarder certificate
   copy:
     dest: "{{ ssl_certificate_base_directory }}/"
-    src: "{{ ssl_certificate_basename }}"
+    src: "files/{{ ssl_certificate_basename }}.crt"
     mode: "0644"
     owner: root
     group: root
