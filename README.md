@@ -41,6 +41,13 @@ Including an example of how to use your role (for instance, with variables passe
         - { role: logstash-client,
           }
 
+Contributions
+-------------
+The following resources were invaluable in creating this role.
+
+* [geerlingguy.logstash](https://github.com/geerlingguy/ansible-role-logstash)
+* [DigitalOcean's ELK guide](https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-4-on-ubuntu-14-04)
+
 License
 -------
 
