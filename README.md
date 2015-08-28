@@ -1,38 +1,47 @@
-Role Name
-=========
-
-A brief description of the role goes here.
+# logstash-client
+Barebones Ansible role for configuring servers to send logs
+to an ELK logserver. Requires an ELK logserver.
 
 Requirements
 ------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Make sure your Ansible inventory has a hostgroup `logserver`.
+The first member of that hostgroup will be considered the logserver.
+Its `eth1` ipv4 address will be used to target logs, over the default
+logstash port of `5000`. The default value of `eth1` assumes
+a private networking interface on a secondary interface.
 
 Role Variables
 --------------
+You'll need an SSL keypair to encrypt logs in transit to the logserver.
+The default filepaths are below. Make sure to use the concatenated
+`logstash_forwarder_certificate_fullpath` variable for convenience.
 
+```
+ssl_certificate_base_directory: /etc/pki/tls/certs
+ssl_certificate_basename: logstash-client
+logstash_forwarder_certificate_fullpath: "{{ ssl_certificate_base_directory }}/{{ ssl_certificate_basename }}.crt"
+```
+
+Add your ELK logserver to the hostgroup `logserver` and make sure `eth1` is
+is available over port `5000`.
+```
+elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_eth1']['ipv4']['address'] }}"
+```
 A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
-Dependencies
-------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
+example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - name: configure logstash clients
+      hosts: logclients
       roles:
-         - { role: username.rolename, x: 42 }
+        - { role: logstash-client,
+          }
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT
