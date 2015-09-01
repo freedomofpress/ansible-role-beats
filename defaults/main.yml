@@ -6,3 +6,14 @@ logstash_forwarder_certificate_fullpath: "{{ ssl_certificate_base_directory }}/{
 
 # Look up private networking interface for logserver.
 elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_eth1']['ipv4']['address'] }}"
+
+
+# All systems should send syslog info.
+logstash_client_logfiles:
+  - { path: /var/log/syslog, type: syslog }
+  - { path: /var/log/auth.log, type: syslog }
+
+# To send additional logfiles, override the following list.
+# Make sure each item has "path" and "type" attributes.
+logstash_client_extra_logfiles: []
+
