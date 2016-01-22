@@ -8,3 +8,7 @@
 - name: update ca certificates
   command: update-ca-certificates -f
 
+- name: restart filebeat
+  service:
+    name: filebeat
+    state: restarted

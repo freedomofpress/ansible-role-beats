@@ -1,0 +1,15 @@
+---
+- name: Copy Filebeat config file.
+  template:
+    src: filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    mode: "0644"
+    owner: root
+    group: root
+  notify: restart filebeat
+
+- name: Enable Filebeat service.
+  service:
+    name: filebeat
+    state: running
+    enabled: yes
