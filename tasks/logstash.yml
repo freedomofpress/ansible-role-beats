@@ -1,5 +1,5 @@
 ---
-- name: install logstash-forwarder config file
+- name: Copy logstash-forwarder config file.
   template:
     src: logstash-forwarder.conf
     dest: /etc/logstash-forwarder.conf
