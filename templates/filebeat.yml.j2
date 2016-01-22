@@ -5,6 +5,9 @@ filebeat:
 
 output:
   logstash:
-    hosts: ["{{ elk_logserver_ip_address }}:5000"]
+    enabled: true
+    hosts:
+      - "{{ elk_logserver_ip_address }}:5000"
+
   console:
     pretty: true
