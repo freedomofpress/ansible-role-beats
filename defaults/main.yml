@@ -44,6 +44,6 @@ logstash_client_logfiles:
 # Make sure each item has "path" and "type" attributes.
 logstash_client_extra_logfiles: []
 
-# Combining these lists
-logstash_client_combined_logfiles: "{{ logstash_client_logfiles + logstash_client_extra_logfiles }}"
-
+# filebeats, topbeats, etc.
+beats_packages:
+  - filebeat

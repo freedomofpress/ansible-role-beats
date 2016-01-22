@@ -5,14 +5,15 @@
     url: https://packages.elasticsearch.org/GPG-KEY-elasticsearch
     state: present
 
-- name: Add logstash-forwarder apt repository.
+- name: Add Beats apt repository.
   become: yes
   apt_repository:
-    repo: 'deb http://packages.elasticsearch.org/logstashforwarder/debian stable main'
+    repo: "deb http://packages.elastic.co/beats/apt stable main"
     state: present
 
-- name: Install logstash-forwarder.
+- name: Install beat packages.
   become: yes
   apt:
-    name: logstash-forwarder
+    name: "{{ item }}"
     state: present
+  with_items: beats_packages
