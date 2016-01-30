@@ -5,7 +5,7 @@ ssl_certificate_basename: logstash-client
 logstash_forwarder_certificate_fullpath: "{{ ssl_certificate_base_directory }}/{{ ssl_certificate_basename }}.crt"
 
 # Look up private networking interface for logserver.
-elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_eth1']['ipv4']['address'] }}"
+elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_eth0']['ipv4']['address'] }}"
 
 
 # All systems should send syslog info.
