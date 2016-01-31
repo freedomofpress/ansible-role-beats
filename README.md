@@ -25,7 +25,7 @@ logstash_forwarder_certificate_fullpath: "{{ ssl_certificate_base_directory }}/{
 Add your ELK logserver to the hostgroup `logserver` and make sure `eth1` is
 is available over port `5000`.
 ```
-elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_eth1']['ipv4']['address'] }}"
+elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_eth0']['ipv4']['address'] }}"
 ```
 A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
