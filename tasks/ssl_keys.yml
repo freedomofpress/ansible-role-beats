@@ -15,6 +15,7 @@
     mode: "0644"
     owner: root
     group: root
-  notify: restart logstash-forwarder
-
+  notify:
+    - update ca certificates
+    - restart logstash-forwarder
 
