@@ -8,3 +8,13 @@
     group: root
   notify: restart logstash-forwarder
 
+  # The logstash-forwarder process needs group membership in "adm"
+  # in order to read log files under Debian (e.g. syslog).
+- name: Edit config to add logstash user to adm group.
+  lineinfile:
+    dest: /etc/default/logstash-forwarder
+    regexp: '^group='
+    line: 'group="adm"'
+    state: present
+  notify: restart logstash-forwarder
+
