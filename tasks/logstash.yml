@@ -6,6 +6,8 @@
     mode: "0644"
     owner: root
     group: root
+    # Only checking for valid JSON, but something's better than nothing.
+    validate: python -m json.tool %s
   notify: restart logstash-forwarder
 
   # The logstash-forwarder process needs group membership in "adm"
