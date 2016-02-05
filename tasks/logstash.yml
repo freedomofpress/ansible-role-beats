@@ -20,3 +20,8 @@
     state: present
   notify: restart logstash-forwarder
 
+- name: Start logstash-forwarder service.
+  service:
+    name: logstash-forwarder
+    state: started
+
