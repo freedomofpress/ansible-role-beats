@@ -10,13 +10,6 @@
   apt_repository:
     repo: 'deb http://packages.elasticsearch.org/logstashforwarder/debian stable main'
     state: present
-  register: apt_repo_config
-
-- name: Update apt cache.
-  become: yes
-  apt:
-    update_cache: yes
-  when: apt_repo_config.changed
 
 - name: Install logstash-forwarder.
   become: yes
