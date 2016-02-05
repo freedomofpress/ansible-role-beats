@@ -1,5 +1,6 @@
 ---
 - name: Copy logstash-forwarder config file.
+  become: yes
   template:
     src: logstash-forwarder.conf
     dest: /etc/logstash-forwarder.conf
@@ -13,6 +14,7 @@
   # The logstash-forwarder process needs group membership in "adm"
   # in order to read log files under Debian (e.g. syslog).
 - name: Edit config to add logstash user to adm group.
+  become: yes
   lineinfile:
     dest: /etc/default/logstash-forwarder
     regexp: '^group='
@@ -21,6 +23,7 @@
   notify: restart logstash-forwarder
 
 - name: Start logstash-forwarder service.
+  become: yes
   service:
     name: logstash-forwarder
     state: started

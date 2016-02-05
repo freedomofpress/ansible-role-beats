@@ -1,6 +1,7 @@
 ---
 # tasks file for logstash-client
 - name: Create SSL certificate directory.
+  become: yes
   file:
     path: "{{ ssl_certificate_base_directory }}"
     mode: "0755"
@@ -9,6 +10,7 @@
     state: directory
 
 - name: Copy logstash-forwarder SSL certificate.
+  become: yes
   copy:
     dest: "{{ ssl_certificate_base_directory }}/"
     src: "files/{{ ssl_certificate_basename }}.crt"
