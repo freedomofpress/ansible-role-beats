@@ -1,12 +1,13 @@
+---
 filebeat:
   prospectors:
+{% for logfile in logstash_client_combined_logfiles %}
     - paths:
-        - /var/log/syslog
-      document_type: syslog
-
-    - paths:
-        - /var/log/dpkg.log
-      document_type: dpkg
+{% for path in logfile.paths %}
+        - {{ path }}
+{% endfor %}
+      document_type: {{ logfile.document_type }}
+{% endfor %}
 
 output:
   logstash:
