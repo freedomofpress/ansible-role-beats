@@ -2,6 +2,11 @@ filebeat:
   prospectors:
     - paths:
         - /var/log/syslog
+      document_type: syslog
+
+    - paths:
+        - /var/log/dpkg.log
+      document_type: dpkg
 
 output:
   logstash:
@@ -11,3 +16,12 @@ output:
 
   console:
     pretty: true
+
+logging:
+  level: debug
+  to_files: true
+  to_syslog: false
+  files:
+    path: /var/log/
+    name: filebeat.log
+    keepfiles: 7
