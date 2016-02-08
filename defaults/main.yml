@@ -44,3 +44,4 @@ logstash_client_combined_logfiles: "{{ logstash_client_logfiles + logstash_clien
 # filebeats, topbeats, etc.
 beats_packages:
   - filebeat
+  - topbeat

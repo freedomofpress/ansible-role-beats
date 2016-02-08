@@ -1,0 +1,16 @@
+---
+input:
+  period: 10
+  stats:
+    system: true
+    process: true
+    filesystem: true
+
+logging:
+  level: debug
+  to_files: true
+  to_syslog: false
+  files:
+    path: /var/log/
+    name: topbeat.log
+    keepfiles: 7
