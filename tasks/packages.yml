@@ -5,6 +5,19 @@
     url: https://packages.elasticsearch.org/GPG-KEY-elasticsearch
     state: present
 
+
+- name: Remove Logstash Forwarder repository
+  become: yes
+  apt_repository:
+    repo: "deb http://packages.elasticsearch.org/logstashforwarder/debian stable main"
+    state: absent
+
+- name: Remove Logstash Forwarder package.
+  become: yes
+  apt:
+    name: logstash-forwarder
+    state: absent
+
 - name: Add Beats apt repository.
   become: yes
   apt_repository:
