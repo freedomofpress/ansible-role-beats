@@ -6,6 +6,15 @@ input:
     process: true
     filesystem: true
 
+output:
+  logstash:
+    enabled: true
+    hosts:
+      - "{{ elk_logserver_ip_address }}:5000"
+
+  console:
+    pretty: true
+
 logging:
   level: debug
   to_files: true
@@ -14,3 +23,4 @@ logging:
     path: /var/log/
     name: topbeat.log
     keepfiles: 7
+

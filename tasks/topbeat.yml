@@ -1,0 +1,15 @@
+---
+- name: Copy Topbeat config file.
+  template:
+    src: topbeat.yml.j2
+    dest: /etc/topbeat/topbeat.yml
+    mode: "0644"
+    owner: root
+    group: root
+  notify: restart topbeat
+
+- name: Start Topbeat service.
+  service:
+    name: topbeat
+    state: running
+
