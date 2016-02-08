@@ -4,9 +4,10 @@ ssl_certificate_base_directory: /etc/pki/tls/certs
 ssl_certificate_basename: logstash-client
 logstash_forwarder_certificate_fullpath: "{{ ssl_certificate_base_directory }}/{{ ssl_certificate_basename }}.crt"
 
-# Look up private networking interface for logserver.
-elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_eth0']['ipv4']['address'] }}"
-
+# Sane default of localhost. Override to set to the IP address of the Logstash server.
+# You can also inspect group membership, e.g.:
+# elk_logserver_ip_address: "{{ hostvars[groups.logserver.0].ansible_default_ipv4.address }}"
+elk_logserver_ip_address: "127.0.0.1"
 
 # Base logfiles that should be tracked on all hosts.
 logstash_client_logfiles:
