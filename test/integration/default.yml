@@ -1,0 +1,7 @@
+---
+- name: Test the logclient role.
+  hosts: all
+  roles:
+    - role: logstash-client
+  tasks:
+    - debug:
