@@ -5,6 +5,7 @@ logstash_client_ssl_certificate_base_directory: /etc/pki/tls/certs
 # Set to a cert filepath in order to copy to host and enable TLS
 # for shipping logs. TLS is disabled by default.
 logstash_client_ssl_certificate: ""
+logstash_client_ssl_certificate_fullpath: "{{ logstash_client_ssl_certificate_base_directory }}/{{ logstash_client_ssl_certificate | basename }}"
 
 # Sane default of localhost. Override to set to the IP address of the Logstash server.
 # You can also inspect group membership, e.g.:

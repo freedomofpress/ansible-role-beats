@@ -18,7 +18,7 @@ output:
       logstash_client_ssl_certificate != "" %}
     tls:
       certificate_authorities:
-        - "{{ logstash_client_ssl_certificate_base_directory }}/{{ logstash_forwarder_certificate_fullpath }}"
+        - "{{ logstash_client_ssl_certificate_fullpath }}"
 {% endif %}
   console:
     pretty: true
