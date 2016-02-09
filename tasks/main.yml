@@ -2,7 +2,9 @@
 - include: packages.yml
 
 - include: ssl_keys.yml
+  when: logstash_client_ssl_certificate != ""
 
 - include: filebeat.yml
 
 - include: topbeat.yml
+

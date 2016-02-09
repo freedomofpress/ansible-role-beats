@@ -14,7 +14,12 @@ output:
     enabled: true
     hosts:
       - "{{ elk_logserver_ip_address }}:5000"
-
+{% if logstash_client_ssl_certificate is defined and
+      logstash_client_ssl_certificate != "" %}
+    tls:
+      certificate_authorities:
+        - "{{ logstash_client_ssl_certificate_base_directory }}/{{ logstash_forwarder_certificate_fullpath }}"
+{% endif %}
   console:
     pretty: true
 

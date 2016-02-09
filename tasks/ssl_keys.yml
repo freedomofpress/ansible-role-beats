@@ -3,7 +3,7 @@
 - name: Create SSL certificate directory.
   become: yes
   file:
-    path: "{{ ssl_certificate_base_directory }}"
+    path: "{{ logstash_client_ssl_certificate_base_directory }}"
     mode: "0755"
     owner: root
     group: root
@@ -12,12 +12,12 @@
 - name: Copy logstash-forwarder SSL certificate.
   become: yes
   copy:
-    dest: "{{ ssl_certificate_base_directory }}/"
-    src: "files/{{ ssl_certificate_basename }}.crt"
+    src: "{{ logstash_client_ssl_certificate }}"
+    dest: "{{ logstash_client_ssl_certificate_base_directory }}/{{ logstash_client_ssl_certificate | basename }}"
     mode: "0644"
     owner: root
     group: root
   notify:
     - update ca certificates
-    - restart logstash-forwarder
+    - restart filebeat
 
