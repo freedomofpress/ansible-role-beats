@@ -6,6 +6,7 @@
     mode: "0644"
     owner: root
     group: root
+    validate: "/usr/bin/filebeat -configtest -c %s"
   notify: restart filebeat
 
 - name: Enable Filebeat service.

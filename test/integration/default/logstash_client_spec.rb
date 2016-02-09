@@ -40,6 +40,14 @@ describe file('/etc/topbeat/topbeat.yml') do
   its('mode') { should eq 0644 }
 end
 
+describe command('topbeat -configtest -c /etc/topbeat/topbeat.yml') do
+  its('exit_status') { should eq 0 }
+end
+
+describe command('filebeat -configtest -c /etc/filebeat/filebeat.yml') do
+  its('exit_status') { should eq 0 }
+end
+
 describe service('filebeat') do
   it { should be_running }
 end
@@ -47,3 +55,4 @@ end
 describe service('topbeat') do
   it { should be_running }
 end
+
