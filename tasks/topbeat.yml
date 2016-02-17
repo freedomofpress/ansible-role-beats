@@ -13,4 +13,5 @@
   service:
     name: topbeat
     state: running
+    enabled: yes
 
