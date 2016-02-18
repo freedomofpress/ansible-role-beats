@@ -1,5 +1,6 @@
 ---
 - name: Copy Topbeat config file.
+  become: yes
   template:
     src: topbeat.yml.j2
     dest: /etc/topbeat/topbeat.yml
@@ -10,6 +11,7 @@
   notify: restart topbeat
 
 - name: Start Topbeat service.
+  become: yes
   service:
     name: topbeat
     state: running
