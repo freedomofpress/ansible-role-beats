@@ -27,4 +27,3 @@
   service:
     name: logstash-forwarder
     state: started
-

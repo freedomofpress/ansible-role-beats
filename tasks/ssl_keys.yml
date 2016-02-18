@@ -20,4 +20,3 @@
   notify:
     - update ca certificates
     - restart filebeat
-

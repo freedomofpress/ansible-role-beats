@@ -7,4 +7,3 @@
 - include: filebeat.yml
 
 - include: topbeat.yml
-
