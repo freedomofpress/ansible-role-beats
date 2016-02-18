@@ -1,11 +1,11 @@
 describe package('filebeat') do
   it { should be_installed }
-  its('version') { should eq '1.1.0' }
+  its('version') { should >= '1.1.0' }
 end
 
 describe package('topbeat') do
   it { should be_installed }
-  its('version') { should eq '1.1.0' }
+  its('version') { should >= '1.1.0' }
 end
 
 describe apt('http://packages.elasticsearch.org/logstashforwarder/debian') do
