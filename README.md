@@ -6,9 +6,8 @@ Requirements
 ------------
 Make sure your Ansible inventory has a hostgroup `logserver`.
 The first member of that hostgroup will be considered the logserver.
-Its `eth1` ipv4 address will be used to target logs, over the default
-logstash port of `5000`. The default value of `eth1` assumes
-a private networking interface on a secondary interface.
+Its `eth0` ipv4 address will be used to target logs, over the default
+logstash port of `5000`.
 
 Role Variables
 --------------
@@ -25,12 +24,11 @@ logstash_forwarder_certificate_fullpath: "{{ ssl_certificate_base_directory }}/{
 Add your ELK logserver to the hostgroup `logserver` and make sure `eth1` is
 is available over port `5000`.
 ```
-elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_eth0']['ipv4']['address'] }}"
+elk_logserver_ip_address: "{{ hostvars[groups['logserver'][0]]['ansible_default_ipv4']['address'] }}"
 ```
 A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
-
-example Playbook
+Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -38,8 +36,8 @@ Including an example of how to use your role (for instance, with variables passe
     - name: configure logstash clients
       hosts: logclients
       roles:
-        - { role: logstash-client,
-          }
+        - role: logstash-client
+          logstash_client_ssl_certificate: files/logstash-client.crt
 
 Contributions
 -------------
