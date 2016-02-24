@@ -39,6 +39,9 @@ describe file('/etc/topbeat/topbeat.yml') do
   it { should be_owned_by('root') }
   it { should be_grouped_into('root') }
   its('mode') { should eq '644' }
+  its('content') { should match(/system: true/) }
+  its('content') { should match(/process: true/) }
+  its('content') { should match(/filesystem: true/) }
 end
 
 describe command('topbeat -configtest -c /etc/topbeat/topbeat.yml') do
