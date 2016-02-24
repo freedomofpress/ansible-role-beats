@@ -36,6 +36,10 @@ logstash_client_logfiles:
     document_type: mysql
 
   - paths:
+      - /var/www/redmine/log/production.log
+    document_type: redmine
+
+  - paths:
       - /var/log/apache2/*log*[^.][^g][^z]
     document_type: apache
 
