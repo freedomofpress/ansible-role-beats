@@ -42,6 +42,10 @@ logstash_client_logfiles:
       - /var/log/apache2/*log
     document_type: apache
 
+  - paths:
+      - /var/log/ufw.log
+    document_type: ufw
+
 # To send additional logfiles, override the following list.
 # Make sure each item has "path" and "type" attributes.
 logstash_client_extra_logfiles: []
