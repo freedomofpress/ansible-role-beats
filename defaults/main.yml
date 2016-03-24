@@ -27,7 +27,6 @@ logstash_client_logfiles:
       - /var/log/tor/info.log
       - /var/log/tor/notice.log
       - /var/log/tor/log
-      - /var/log/tor/log.1
     document_type: tor
 
   - paths:
@@ -40,7 +39,7 @@ logstash_client_logfiles:
     document_type: redmine
 
   - paths:
-      - /var/log/apache2/*log*[^.][^g][^z]
+      - /var/log/apache2/*log
     document_type: apache
 
 # To send additional logfiles, override the following list.
