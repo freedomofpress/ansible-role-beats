@@ -1,14 +1,11 @@
-# logstash-client
-Barebones Ansible role for configuring servers to send logs
-to an ELK logserver. Requires an ELK logserver.
+# Logstash client Ansible role
+Ansible role for shipping logs and metrics to an ELK logserver.
+Uses [filebeat] and [topbeat], not the deprecated logstash-forwarder.
+Intended for use with the [freedomofpress.elk] role.
 
 Requirements
 ------------
-An ELK logserver to ship to.
-If your Ansible inventory has a hostgroup `logserver`,
-the first member of that group will be considered the logserver.
-Its `eth0` ipv4 address will be used to target logs, over the default
-logstash port of `5000`.
+* an ELK logserver to ship to (see the [freedomofpress.elk] role)
 
 Role Variables
 --------------
@@ -98,3 +95,7 @@ License
 -------
 
 MIT
+
+[freedomofpress.elk]: https://github.com/freedomofpress/ansible-role-elk
+[filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html
+[topbeat]: https://www.elastic.co/guide/en/beats/topbeat/current/_overview.html
