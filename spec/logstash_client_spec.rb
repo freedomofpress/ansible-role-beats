@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe package('filebeat') do
   it { should be_installed }
-  its('version') { should >= '1.1.0' }
+  its('version') { should >= '1.2.1' }
 end
 
 describe package('topbeat') do
   it { should be_installed }
-  its('version') { should >= '1.1.0' }
+  its('version') { should >= '1.2.1' }
 end
 
 describe package('logstash-forwarder') do
