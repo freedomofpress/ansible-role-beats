@@ -2,6 +2,6 @@
 - name: Test the logclient role.
   hosts: all
   roles:
-    - role: logstash-client
+    - role: ansible-role-logstash-client
   tasks:
     - debug:

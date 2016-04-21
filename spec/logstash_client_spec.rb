@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe package('filebeat') do
   it { should be_installed }
-  its('version') { should >= '1.1.0' }
+  its('version') { should >= '1.2.1' }
 end
 
 describe package('topbeat') do
   it { should be_installed }
-  its('version') { should >= '1.1.0' }
+  its('version') { should >= '1.2.1' }
 end
 
 describe package('logstash-forwarder') do
@@ -42,6 +42,7 @@ describe file('/etc/topbeat/topbeat.yml') do
   its('content') { should match(/system: true/) }
   its('content') { should match(/process: true/) }
   its('content') { should match(/filesystem: true/) }
+  its('content') { should match(/period: 10/) }
 end
 
 describe command('topbeat -configtest -c /etc/topbeat/topbeat.yml') do
@@ -54,8 +55,10 @@ end
 
 describe service('filebeat') do
   it { should be_running }
+  it { should be_enabled }
 end
 
 describe service('topbeat') do
   it { should be_running }
+  it { should be_enabled }
 end
