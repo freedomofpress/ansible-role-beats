@@ -23,3 +23,4 @@ vagrant:
 
 ansible:
   playbook: examples/test.yml
+  sudo: no

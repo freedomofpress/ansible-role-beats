@@ -3,5 +3,3 @@
   hosts: all
   roles:
     - role: ansible-role-logstash-client
-  tasks:
-    - debug:

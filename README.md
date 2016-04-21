@@ -77,14 +77,13 @@ logstash_client_combined_logfiles: "{{ logstash_client_logfiles + logstash_clien
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - name: configure logstash clients
-      hosts: logclients
-      roles:
-        - role: logstash-client
-          # generate a self-signed SSL cert elsewhere
-          logstash_client_ssl_certificate: files/logstash-client.crt
+```
+- name: Configure Logstash clients.
+  hosts: logclients
+  roles:
+    - role: freedomofpress.logstash-client
+  tags: clients
+```
 
 Contributions
 -------------
