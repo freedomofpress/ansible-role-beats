@@ -91,6 +91,8 @@ The following resources were invaluable in creating this role.
 
 * [geerlingguy.logstash](https://github.com/geerlingguy/ansible-role-logstash)
 * [DigitalOcean's ELK guide](https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-4-on-ubuntu-14-04)
+* [topbeat configuration guide](https://www.elastic.co/guide/en/beats/topbeat/current/topbeat-configuration-options.html)
+* [filebeat configuration guide](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html)
 
 License
 -------
