@@ -1,11 +1,5 @@
 ---
 # handlers file for logstash-client
-- name: restart logstash-forwarder
-  become: yes
-  service:
-    name: logstash-forwarder
-    state: restarted
-
 - name: update ca certificates
   become: yes
   command: update-ca-certificates -f
