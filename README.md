@@ -85,6 +85,26 @@ Example Playbook
   tags: clients
 ```
 
+Running the tests
+-----------------
+
+This role uses [Molecule] and [ServerSpec] for testing. To use it:
+
+```
+pip install molecule
+gem install serverspec
+molecule test
+```
+
+You can also run selective commands:
+
+```
+molecule idempotence
+molecule verify
+```
+
+See the [Molecule] docs for more info.
+
 Contributions
 -------------
 The following resources were invaluable in creating this role.
@@ -99,6 +119,8 @@ License
 
 MIT
 
+[Molecule]: http://molecule.readthedocs.org/en/master/
+[ServerSpec]: http://serverspec.org/
 [freedomofpress.elk]: https://github.com/freedomofpress/ansible-role-elk
 [filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html
 [topbeat]: https://www.elastic.co/guide/en/beats/topbeat/current/_overview.html
