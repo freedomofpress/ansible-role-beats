@@ -42,6 +42,7 @@ describe file('/etc/topbeat/topbeat.yml') do
   its('content') { should match(/system: true/) }
   its('content') { should match(/process: true/) }
   its('content') { should match(/filesystem: true/) }
+  its('content') { should match(/period: 10/) }
 end
 
 describe command('topbeat -configtest -c /etc/topbeat/topbeat.yml') do
