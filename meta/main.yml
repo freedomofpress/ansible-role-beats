@@ -9,4 +9,12 @@ galaxy_info:
     - name: Debian
       versions:
         - jessie
+  galaxy_tags:
+    - monitoring
+    - logging
+    - security
+    - metrics
+    - topbeat
+    - filebeat
+    - elk
 dependencies: []
