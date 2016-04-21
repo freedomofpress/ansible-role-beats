@@ -10,7 +10,9 @@ Requirements
 Role Variables
 --------------
 You'll need an SSL cert to encrypt logs in transit to the logserver.
-If you don't specify an SSL cert, SSL will be disabled.
+**If you don't specify an SSL cert, SSL will be disabled.**
+The [freedomofpress.elk] role will automatically generated a self-signed
+SSL cert and use that when configuring the filebeat and topbeat integrations.
 
 ```yaml
 # The libbeat packages to install. Options: filebeat, topbeat, packetbeat.
