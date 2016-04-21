@@ -3,8 +3,12 @@ vagrant:
   platforms:
     - name: jessie64
       box: debian/jessie64
+
     - name: trusty64
       box: ubuntu/trusty64
+
+    - name: wily64
+      box: ubuntu/wily64
 
   providers:
     - name: virtualbox
@@ -17,9 +21,5 @@ vagrant:
           type: dhcp
           auto_config: true
 
-molecule:
-  inspec_dir: test/integration/default
-  testinfra_dir: foo
-
 ansible:
-  playbook: test/integration/default.yml
+  playbook: examples/test.yml
