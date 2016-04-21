@@ -12,6 +12,9 @@ logstash_client_ssl_certificate_fullpath: "{{ logstash_client_ssl_certificate_ba
 # logstash_client_logserver_ip_address: "{{ hostvars[groups.logserver.0].ansible_default_ipv4.address }}"
 logstash_client_logserver_ip_address: "127.0.0.1"
 
+# Controls how often Topbeat reports stats (in seconds)
+logstash_client_topbeat_period: 10
+
 # Base logfiles that should be tracked on all hosts.
 logstash_client_logfiles:
   - paths:
