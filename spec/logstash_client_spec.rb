@@ -55,8 +55,10 @@ end
 
 describe service('filebeat') do
   it { should be_running }
+  it { should be_enabled }
 end
 
 describe service('topbeat') do
   it { should be_running }
+  it { should be_enabled }
 end
