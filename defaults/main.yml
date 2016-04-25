@@ -54,6 +54,16 @@ logstash_client_logfiles:
       - /var/log/ufw.log
     document_type: ufw
 
+  - paths:
+      - /var/log/fail2ban.log
+    document_type: fail2ban
+
+  - paths:
+      - /var/log/mail.info
+      - /var/log/mail.warn
+      - /var/log/mail.err
+    document_type: postfix
+
 # To send additional logfiles, override the following list.
 # Make sure each item has "path" and "type" attributes.
 logstash_client_extra_logfiles: []
