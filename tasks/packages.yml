@@ -28,4 +28,4 @@
   apt:
     name: "{{ item }}"
     state: present
-  with_items: logstash_client_beats_packages
+  with_items: "{{ logstash_client_beats_packages }}"
