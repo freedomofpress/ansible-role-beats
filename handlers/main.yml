@@ -1,9 +1,5 @@
 ---
 # handlers file for logstash-client
-- name: update ca certificates
-  become: yes
-  command: update-ca-certificates -f
-
 - name: restart filebeat
   become: yes
   service:

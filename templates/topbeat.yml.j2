@@ -11,11 +11,13 @@ output:
     enabled: true
     hosts:
       - "{{ logstash_client_logserver_ip_address }}:5000"
-{% if logstash_client_ssl_certificate is defined and
-      logstash_client_ssl_certificate != "" %}
+{% if logstash_client_ssl %}
     tls:
+{% if logstash_client_ssl_certificate_fullpath != "" %}
       certificate_authorities:
         - "{{ logstash_client_ssl_certificate_fullpath }}"
+{% endif %}
+      insecure: {{ logstash_output_insecure }}
 {% endif %}
 
 logging:
