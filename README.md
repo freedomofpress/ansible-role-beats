@@ -10,9 +10,7 @@ Requirements
 Role Variables
 --------------
 You'll need an SSL cert to encrypt logs in transit to the logserver.
-**If you don't specify an SSL cert, SSL will be disabled.**
-The [freedomofpress.elk] role will automatically generated a self-signed
-SSL cert and use that when configuring the filebeat and topbeat integrations.
+**If you don't explicitly enable SSL via `logstash_client_ssl` boolean, SSL will be disabled.**
 
 ```yaml
 # The libbeat packages to install. Options: filebeat, topbeat, packetbeat.
@@ -20,13 +18,13 @@ logstash_client_beats_packages:
   - filebeat
   - topbeat
 
-logstash_client_ssl_certificate_base_directory: /etc/pki/tls/certs
-
-# Set to a cert filepath in order to copy to host and enable TLS
-# for shipping logs. TLS is disabled by default.
-logstash_client_ssl_certificate: ""
-logstash_client_ssl_certificate_fullpath: >-
-  "{{ logstash_client_ssl_certificate_base_directory }}/{{ logstash_client_ssl_certificate | basename }}"
+# Set to true to enable ssl - TLS disabled by default
+# If you specify a CA path that will be added to the config,
+#     otherwise the system CA store will be utilized
+logstash_client_ssl: false
+logstash_client_ssl_certificate_fullpath: ""
+# only override this for testing, this disables ssl verification
+logstash_output_insecure: false
 
 # Sane default of localhost. Override to set to the IP address of the Logstash server.
 # You can also inspect group membership, e.g.:
