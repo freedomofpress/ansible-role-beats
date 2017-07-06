@@ -21,7 +21,7 @@ logstash_client_ssl_certificate_fullpath: ""
 # only override this for testing, this disables ssl verification
 logstash_output_insecure: false
 
-# Sane default of localhost. Override to set to the IP address of the Logstash server.
+# Sane default of localhost. Override to set to the IP address/DNS of the Logstash server.
 # You can also inspect group membership, e.g.:
 # logstash_client_logserver_ip_address: "{{ hostvars[groups.logserver.0].ansible_default_ipv4.address }}"
 logstash_client_logserver: "127.0.0.1"

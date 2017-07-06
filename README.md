@@ -1,11 +1,10 @@
-# Logstash client Ansible role
-Ansible role for shipping logs and metrics to an ELK logserver.
-Uses [filebeat] and [topbeat], not the deprecated logstash-forwarder.
-Intended for use with the [freedomofpress.elk] role.
+# Beats client Ansible role
+Ansible role for shipping logs and metrics to an ELK logserver via beats agents.
+By default, is ready for installing/configuring [filebeat] and [topbeat].
 
 Requirements
 ------------
-* an ELK logserver to ship to (see the [freedomofpress.elk] role)
+* an ELK logserver to ship to
 
 Role Variables
 --------------
@@ -18,6 +17,15 @@ logstash_client_beats_packages:
   - filebeat
   - topbeat
 
+logstash_client_beats_prereq:
+  - apt-transport-https
+
+# Elastic's PGP key for signing their repository
+logstash_elastic_pgp_key: "46095ACC8548582C1A2699A9D27D666CD88E42B4"
+
+# Elastic's beats debian repository
+logstash_elastic_repo_url: "deb https://artifacts.elastic.co/packages/5.x/apt stable main"
+
 # Set to true to enable ssl - TLS disabled by default
 # If you specify a CA path that will be added to the config,
 #     otherwise the system CA store will be utilized
@@ -26,10 +34,14 @@ logstash_client_ssl_certificate_fullpath: ""
 # only override this for testing, this disables ssl verification
 logstash_output_insecure: false
 
-# Sane default of localhost. Override to set to the IP address of the Logstash server.
+# Sane default of localhost. Override to set to the IP address/DNS of the Logstash server.
 # You can also inspect group membership, e.g.:
 # logstash_client_logserver_ip_address: "{{ hostvars[groups.logserver.0].ansible_default_ipv4.address }}"
-logstash_client_logserver_ip_address: "127.0.0.1"
+logstash_client_logserver: "127.0.0.1"
+logstash_client_port: 5000
+
+# Controls how often Topbeat reports stats (in seconds)
+logstash_client_topbeat_period: 10
 
 # Base logfiles that should be tracked on all hosts.
 logstash_client_logfiles:
@@ -64,6 +76,16 @@ logstash_client_logfiles:
   - paths:
       - /var/log/ufw.log
     document_type: ufw
+
+  - paths:
+      - /var/log/fail2ban.log
+    document_type: fail2ban
+
+  - paths:
+      - /var/log/mail.info
+      - /var/log/mail.warn
+      - /var/log/mail.err
+    document_type: postfix
 
 # To send additional logfiles, override the following list.
 # Make sure each item has "path" and "type" attributes.
