@@ -24,7 +24,7 @@ logstash_output_insecure: false
 # Sane default of localhost. Override to set to the IP address of the Logstash server.
 # You can also inspect group membership, e.g.:
 # logstash_client_logserver_ip_address: "{{ hostvars[groups.logserver.0].ansible_default_ipv4.address }}"
-logstash_client_logserver_ip_address: "127.0.0.1"
+logstash_client_logserver: "127.0.0.1"
 logstash_client_port: 5000
 
 # Controls how often Topbeat reports stats (in seconds)

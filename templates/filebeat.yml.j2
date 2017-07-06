@@ -13,7 +13,7 @@ output:
   logstash:
     enabled: true
     hosts:
-      - "{{ logstash_client_logserver_ip_address }}:{{ logstash_client_port }}"
+      - "{{ logstash_client_logserver }}:{{ logstash_client_port }}"
 {% if logstash_client_ssl %}
     tls:
 {% if logstash_client_ssl_certificate_fullpath != "" %}
