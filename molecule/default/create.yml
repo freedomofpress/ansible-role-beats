@@ -1,0 +1,37 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    molecule_file: "{{ lookup('env', 'MOLECULE_FILE') }}"
+    molecule_ephemeral_directory: "{{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') }}"
+    molecule_scenario_directory: "{{ lookup('env', 'MOLECULE_SCENARIO_DIRECTORY') }}"
+    molecule_yml: "{{ lookup('file', molecule_file) | from_yaml }}"
+    docker_config: "{{ lookup('file', 'docker_hashes.yml') | from_yaml }}"
+  tasks:
+    # If you add this into the molecule file, molecule adds it as a target for
+    # ansible / testinfra which is not something we want
+    - name: Start up Logstash
+      docker_container:
+        name: beats_role_logstash
+        image: "quay.io/freedomofpress/logstash-with-paxflags@{{ docker_config['logstash'] }}"
+        state: started
+        exposed_ports:
+          - 5000
+
+    - name: Create molecule instance(s)
+      docker_container:
+        name: "{{ molecule_file | molecule_instance_with_scenario_name(item.name) }}"
+        hostname: "{{ molecule_file | molecule_instance_with_scenario_name(item.name) }}"
+        image: "{{ item.image }}@{{ docker_config[item.image] }}"
+        state: started
+        recreate: False
+        log_driver: syslog
+        command: "{{ item.command | default(omit)}}"
+        privileged: "{{ item.privileged | default(omit) }}"
+        volumes: "{{ item.volumes | default(omit) }}"
+        capabilities: "{{ item.capabilities | default(omit) }}"
+        links:
+          beats_role_logstash:logstash
+        published_ports: "{{ item.published_ports | default(omit) }}"
+        exposed_ports: "{{ item.exposed_ports | default(omit) }}"
+      with_items: "{{ molecule_yml.platforms }}"

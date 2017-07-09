@@ -1,8 +1,4 @@
 ---
 - include: packages.yml
 
-- include: filebeat.yml
-  when: "'filebeat' in logstash_client_beats_packages"
-
-- include: topbeat.yml
-  when: "'topbeat' in logstash_client_beats_packages"
+- include: configure.yml

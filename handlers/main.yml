@@ -1,13 +1,24 @@
 ---
-# handlers file for logstash-client
 - name: restart filebeat
   become: yes
   service:
     name: filebeat
     state: restarted
 
-- name: restart topbeat
+- name: restart packetbeat
   become: yes
   service:
     name: topbeat
+    state: restarted
+
+- name: restart heartbeat
+  become: yes
+  service:
+    name: heartbeat
+    state: restarted
+
+- name: restart metricbeat
+  become: yes
+  service:
+    name: metricbeat
     state: restarted
