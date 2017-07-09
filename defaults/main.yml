@@ -2,7 +2,7 @@
 # The libbeat packages to install. Options: filebeat, topbeat, packetbeat.
 logstash_client_beats_packages:
   - filebeat
-  - topbeat
+  - metricbeat
 
 logstash_client_beats_prereq:
   - apt-transport-https
