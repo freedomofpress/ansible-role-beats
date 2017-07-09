@@ -1,30 +1,21 @@
 ---
 - name: Add ElasticSearch apt key.
-  become: yes
   apt_key:
-    url: https://packages.elasticsearch.org/GPG-KEY-elasticsearch
+    id: "{{ logstash_elastic_pgp_key }}"
+    keyserver: pgp.mit.edu
     state: present
 
-- name: Remove Logstash Forwarder repository
-  become: yes
-  apt_repository:
-    repo: "deb http://packages.elasticsearch.org/logstashforwarder/debian stable main"
-    state: absent
-
-- name: Remove Logstash Forwarder package.
-  become: yes
+- name: Install beats pre-req software
   apt:
-    name: logstash-forwarder
-    state: absent
+    name: "{{ item }}"
+  with_items: "{{ logstash_client_beats_prereq }}"
 
 - name: Add Beats apt repository.
-  become: yes
   apt_repository:
-    repo: "deb http://packages.elastic.co/beats/apt stable main"
+    repo: "{{ logstash_elastic_repo_url }}"
     state: present
 
 - name: Install beat packages.
-  become: yes
   apt:
     name: "{{ item }}"
     state: present

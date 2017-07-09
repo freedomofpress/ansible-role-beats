@@ -4,6 +4,15 @@ logstash_client_beats_packages:
   - filebeat
   - topbeat
 
+logstash_client_beats_prereq:
+  - apt-transport-https
+
+# Elastic's PGP key for signing their repository
+logstash_elastic_pgp_key: "46095ACC8548582C1A2699A9D27D666CD88E42B4"
+
+# Elastic's beats debian repository
+logstash_elastic_repo_url: "deb https://artifacts.elastic.co/packages/5.x/apt stable main"
+
 # Set to true to enable ssl - TLS disabled by default
 # If you specify a CA path that will be added to the config,
 #     otherwise the system CA store will be utilized
@@ -12,10 +21,10 @@ logstash_client_ssl_certificate_fullpath: ""
 # only override this for testing, this disables ssl verification
 logstash_output_insecure: false
 
-# Sane default of localhost. Override to set to the IP address of the Logstash server.
+# Sane default of localhost. Override to set to the IP address/DNS of the Logstash server.
 # You can also inspect group membership, e.g.:
 # logstash_client_logserver_ip_address: "{{ hostvars[groups.logserver.0].ansible_default_ipv4.address }}"
-logstash_client_logserver_ip_address: "127.0.0.1"
+logstash_client_logserver: "127.0.0.1"
 logstash_client_port: 5000
 
 # Controls how often Topbeat reports stats (in seconds)
