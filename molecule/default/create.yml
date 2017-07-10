@@ -10,11 +10,35 @@
   tasks:
     # If you add this into the molecule file, molecule adds it as a target for
     # ansible / testinfra which is not something we want
+    - name: Start up elasticsearch
+      docker_container:
+        name: beats_role_elasticsearch
+        image: "quay.io/freedomofpress/elasticsearch-with-paxflags@{{ docker_config['elasticsearch'] }}"
+        state: started
+        exposed_ports:
+          - 9200
+        published_ports:
+          - 9200:9200
+        env:
+          xpack.monitoring.enabled: "false"
+          xpack.security.enabled: "false"
+          # allow connecting from head UI for debugging
+          http.host: 0.0.0.0
+          discovery.type: single-node
+          http.cors.allow-origin: "http://localhost:9100"
+          http.cors.enabled: "true"
+          http.cors.allow-credentials: "true"
+          http.cors.allow-headers: "X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization"
+
     - name: Start up Logstash
       docker_container:
         name: beats_role_logstash
         image: "quay.io/freedomofpress/logstash-with-paxflags@{{ docker_config['logstash'] }}"
         state: started
+        env:
+          config.string: "{{ lookup('file', 'logstash.pipeline') }}"
+        links:
+          beats_role_elasticsearch:esserver
         exposed_ports:
           - 5000
 
@@ -31,7 +55,8 @@
         volumes: "{{ item.volumes | default(omit) }}"
         capabilities: "{{ item.capabilities | default(omit) }}"
         links:
-          beats_role_logstash:logstash
+          - beats_role_logstash:logstash-server
+          - beats_role_elasticsearch:esserver
         published_ports: "{{ item.published_ports | default(omit) }}"
         exposed_ports: "{{ item.exposed_ports | default(omit) }}"
       with_items: "{{ molecule_yml.platforms }}"

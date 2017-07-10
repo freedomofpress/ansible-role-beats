@@ -12,7 +12,10 @@
         state: absent
       with_items: "{{ molecule_yml.platforms }}"
 
-    - name: Destroy elasticsearch
+    - name: Destroy support containers
       docker_container:
-        name: "kibana_role_elasticsearch"
+        name: "beats_role_{{ item }}"
         state: absent
+      with_items:
+        - elasticsearch
+        - logstash

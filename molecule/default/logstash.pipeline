@@ -1,0 +1,12 @@
+input {
+    beats {
+        port => 5000
+    }
+}
+
+output {
+    elasticsearch {
+        hosts => "esserver"
+        index => "logstash"
+    }
+}
