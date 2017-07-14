@@ -18,6 +18,8 @@ is not enabled by default. You'll need to reference the official beats
 documentation output guides to add those options via variable.
 
 ```yaml
+---
+
 #### PACKAGING #################################################################
 
 # The libbeat packages to install.
@@ -25,6 +27,9 @@ documentation output guides to add those options via variable.
 beats_client_beats_packages:
   - filebeat
   - metricbeat
+
+beats_client_version: 5.5.0
+beats_client_major_ver: 5.x
 
 beats_client_beats_prereq:
   - apt-transport-https
@@ -34,9 +39,10 @@ beats_client_elastic_pgp_key: "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 beats_client_keyserver: pgp.mit.edu
 
 # Elastic's beats debian repository
-beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/5.x/apt stable main"
+beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{beats_client_major_ver}}/apt stable main"
 
 #### FILEBEAT ##################################################################
+
 
 # Sane default of localhost. Override to set to the IP address/DNS of the Logstash server.
 beats_client_logserver: "127.0.0.1"
@@ -125,6 +131,20 @@ beats_client_packetbeat_config: {}
 
 #### HEARTBEAT ##################################################################
 beats_client_heartbeat_config: {}
+
+#### KIBANA ##################################################################
+
+beats_client_kibana_export: no
+beats_client_kibana_index: metrics-logstash-*
+beats_client_kibana_url_base: http://localhost:9200
+beats_client_kibana_url: "{{ beats_client_kibana_url_base }}/.kibana"
+beats_client_kibana_indices:
+  metricbeat: metrics-logstash-*
+  filebeat: syslog-*
+beats_client_kibana_dash_search:
+  metricbeat: Metricbeat*
+  filebeat: Filebeat*
+beats_client_kibana_export_parameters: "-only-dashboards -es {{beats_client_kibana_url_base}}"
 
 #### SHARED ##################################################################
 

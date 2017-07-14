@@ -112,6 +112,20 @@ beats_client_packetbeat_config: {}
 #### HEARTBEAT ##################################################################
 beats_client_heartbeat_config: {}
 
+#### KIBANA ##################################################################
+
+beats_client_kibana_export: no
+beats_client_kibana_index: metrics-logstash-*
+beats_client_kibana_url_base: http://localhost:9200
+beats_client_kibana_url: "{{ beats_client_kibana_url_base }}/.kibana"
+beats_client_kibana_indices:
+  metricbeat: metrics-logstash-*
+  filebeat: syslog-*
+beats_client_kibana_dash_search:
+  metricbeat: Metricbeat*
+  filebeat: Filebeat*
+beats_client_kibana_export_parameters: "-only-dashboards -es {{beats_client_kibana_url_base}}"
+
 #### SHARED ##################################################################
 
 # Note that SSL is disabled here by default, you'll need to override this
