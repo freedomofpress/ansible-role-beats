@@ -7,7 +7,6 @@
     mode: "0644"
     owner: root
     group: root
-    validate: "/usr/share/{{item}}/bin/{{item}} -configtest -path.config %s/../ -c source"
   notify: "restart {{ item }}"
   with_items: "{{ beats_client_beats_packages }}"
 
