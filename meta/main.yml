@@ -1,7 +1,9 @@
 ---
 galaxy_info:
-  author: Conor Schaefer (@conorsch)
-  description: Ships logs and metrics to ELK logserver.
+  author:
+    - Conor Schaefer (@conorsch)
+    - Michael Sheinberg (@msheiny)
+  description: Deploys and configure Elastic beats
   company: Freedom of the Press Foundation (@freedomofpress)
   license: MIT
   min_ansible_version: 2

@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - role: ansible-role-beats
+  vars:
+    beats_client_logserver: logstash-server

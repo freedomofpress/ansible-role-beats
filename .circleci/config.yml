@@ -1,0 +1,19 @@
+---
+version: 2
+jobs:
+  build:
+    working_directory: /root/ansible-role-beats
+    docker:
+      - image: quay.io/freedomofpress/circleci-docker@sha256:3919aa22af019f6a5db04ecd7320841401652b0ed93a1c3834cd604685242ce7
+    steps:
+      - checkout
+
+      - run:
+          name: Setup dependencies
+          command: pip install -r requirements.txt
+
+      - setup_remote_docker
+
+      - run:
+          name: Test ansible role
+          command: molecule test

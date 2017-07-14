@@ -1,0 +1,4 @@
+ansible>2.3<=2.4
+docker-py
+molecule>=2.*
+pip-tools

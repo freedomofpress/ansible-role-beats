@@ -1,22 +1,22 @@
 ---
 - name: Add ElasticSearch apt key.
   apt_key:
-    id: "{{ logstash_elastic_pgp_key }}"
-    keyserver: pgp.mit.edu
+    id: "{{ beats_client_elastic_pgp_key }}"
+    keyserver: "{{ beats_client_keyserver }}"
     state: present
 
 - name: Install beats pre-req software
   apt:
     name: "{{ item }}"
-  with_items: "{{ logstash_client_beats_prereq }}"
+  with_items: "{{ beats_client_beats_prereq }}"
 
 - name: Add Beats apt repository.
   apt_repository:
-    repo: "{{ logstash_elastic_repo_url }}"
+    repo: "{{ beats_client_elastic_repo_url }}"
     state: present
 
 - name: Install beat packages.
   apt:
-    name: "{{ item }}"
+    name: "{{ item }}={{ beats_client_version }}"
     state: present
-  with_items: "{{ logstash_client_beats_packages }}"
+  with_items: "{{ beats_client_beats_packages }}"
