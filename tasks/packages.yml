@@ -17,6 +17,6 @@
 
 - name: Install beat packages.
   apt:
-    name: "{{ item }}"
+    name: "{{ item }}={{ beats_client_version }}"
     state: present
   with_items: "{{ beats_client_beats_packages }}"
