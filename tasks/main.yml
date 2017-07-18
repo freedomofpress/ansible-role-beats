@@ -2,3 +2,7 @@
 - include: packages.yml
 
 - include: configure.yml
+
+- include: kibana.yml
+  tags: kibana
+  when: beats_client_kibana_export

@@ -9,7 +9,8 @@ beats_client_beats_packages:
   - metricbeat
 
 beats_client_version: 5.5.0
-beats_client_major_ver: 5.x
+# The apt repo URL pegs minor versions (e.g. 5.x) to avoid unexpected upgrades
+beats_client_major_version_abbreviated: 5.x
 
 beats_client_beats_prereq:
   - apt-transport-https
@@ -19,7 +20,7 @@ beats_client_elastic_pgp_key: "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 beats_client_keyserver: pgp.mit.edu
 
 # Elastic's beats debian repository
-beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{beats_client_major_ver}}/apt stable main"
+beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated }}/apt stable main"
 
 #### FILEBEAT ##################################################################
 
@@ -111,6 +112,20 @@ beats_client_packetbeat_config: {}
 
 #### HEARTBEAT ##################################################################
 beats_client_heartbeat_config: {}
+
+#### KIBANA ##################################################################
+
+beats_client_kibana_export: no
+beats_client_kibana_index: metrics-logstash-*
+beats_client_kibana_url_base: http://localhost:9200
+beats_client_kibana_url: "{{ beats_client_kibana_url_base }}/.kibana"
+beats_client_kibana_indices:
+  metricbeat: metrics-logstash-*
+  filebeat: syslog-*
+beats_client_kibana_dash_search:
+  metricbeat: Metricbeat*
+  filebeat: Filebeat*
+beats_client_kibana_export_parameters: "-only-dashboards -es {{beats_client_kibana_url_base}}"
 
 #### SHARED ##################################################################
 
