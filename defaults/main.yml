@@ -121,7 +121,7 @@ beats_client_heartbeat_config: {}
 # Default dashboard export only works in this role with the 5.x series
 # for 6.x you can now export through the respective config files directly
 beats_client_kibana_export: no
-beats_client_kibana_index: metrics-logstash-*
+
 beats_client_kibana_url_base: http://localhost:9200
 beats_client_kibana_url: "{{ beats_client_kibana_url_base }}/.kibana"
 beats_client_kibana_indices:
