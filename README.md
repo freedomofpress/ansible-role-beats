@@ -56,24 +56,25 @@ beats_client_logfiles:
   - paths:
       - /var/log/syslog
       - /var/log/auth.log
-    document_type: syslog
+    tags: ['syslog']
 
   - paths:
       - /var/log/dpkg.log
-    document_type: dpkg
+    tags: ['dpkg']
 
   - paths:
       - /var/log/apache2/*log
-    document_type: apache
+    tags: ['apache']
 
   - paths:
       - /var/log/mail.info
       - /var/log/mail.warn
       - /var/log/mail.err
-    document_type: postfix
+    tags: ['postfix']
 
 # To send additional logfiles, override the following list.
-# Make sure each item has "path" and "type" attributes.
+# See
+# https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_literal_tags_literal
 beats_client_extra_logfiles: []
 
 beats_client_filebeat_combined_logfiles: "{{ beats_client_logfiles + beats_client_extra_logfiles }}"
@@ -91,6 +92,7 @@ beats_client_filebeat_config:
   filebeat.prospectors: "{{ beats_client_filebeat_combined_logfiles }}"
   output: "{{ beats_client_output }}"
   logging: "{{ beats_client_filebeat_logging }}"
+  setup: "{{ beats_client_filebeat_setup }}"
 
 #### METRICBEAT ##################################################################
 # See: www.elastic.co/guide/en/beats/metricbeat/master/metricbeat-configuration-options.html
@@ -125,6 +127,7 @@ beats_client_metricbeat_config:
   metricbeat.modules: "{{ beats_client_metricbeat_modules }}"
   output: "{{ beats_client_output }}"
   logging: "{{ beats_client_metricbeat_logging }}"
+  setup: "{{ beats_client_metricbeat_setup }}"
 
 #### PACKETBEAT ##################################################################
 # See: www.elastic.co/guide/en/beats/packetbeat/master/configuring-packetbeat.html
@@ -135,8 +138,10 @@ beats_client_heartbeat_config: {}
 
 #### KIBANA ##################################################################
 
+# Default dashboard export only works in this role with the 5.x series
+# for 6.x you can now export through the respective config files directly
 beats_client_kibana_export: no
-beats_client_kibana_index: metrics-logstash-*
+
 beats_client_kibana_url_base: http://localhost:9200
 beats_client_kibana_url: "{{ beats_client_kibana_url_base }}/.kibana"
 beats_client_kibana_indices:
@@ -145,6 +150,8 @@ beats_client_kibana_indices:
 beats_client_kibana_dash_search:
   metricbeat: Metricbeat*
   filebeat: Filebeat*
+# Only applicable to beats <5.x you can now setup the dashboards
+# via configuration setup.dashboards per client.
 beats_client_kibana_export_parameters: "-only-dashboards -es {{beats_client_kibana_url_base}}"
 
 #### SHARED ##################################################################
@@ -157,6 +164,12 @@ beats_client_output:
     enabled: true
     hosts:
       - "{{ beats_client_logserver }}:{{ beats_client_port }}"
+
+# Added in 6.x series for among other things,
+# dashboard setup
+# https://www.elastic.co/guide/en/beats/filebeat/current/configuration-dashboards.html
+beats_client_filebeat_setup: {}
+beats_client_metricbeat_setup: {}
 
 # Master config dictionary variable.
 beats_clients_configs:
