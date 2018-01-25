@@ -28,9 +28,9 @@ beats_client_beats_packages:
   - filebeat
   - metricbeat
 
-beats_client_version: 5.5.0
+beats_client_version: 6.1.2
 # The apt repo URL pegs minor versions (e.g. 5.x) to avoid unexpected upgrades
-beats_client_major_version_abbreviated: 5.x
+beats_client_major_version_abbreviated: 6.x
 
 beats_client_beats_prereq:
   - apt-transport-https
