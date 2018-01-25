@@ -36,21 +36,21 @@ beats_client_logfiles:
   - paths:
       - /var/log/syslog
       - /var/log/auth.log
-    document_type: syslog
+    tags: ['syslog']
 
   - paths:
       - /var/log/dpkg.log
-    document_type: dpkg
+    tags: ['dpkg']
 
   - paths:
       - /var/log/apache2/*log
-    document_type: apache
+    tags: ['apache']
 
   - paths:
       - /var/log/mail.info
       - /var/log/mail.warn
       - /var/log/mail.err
-    document_type: postfix
+    tags: ['postfix']
 
 # To send additional logfiles, override the following list.
 # Make sure each item has "path" and "type" attributes.
