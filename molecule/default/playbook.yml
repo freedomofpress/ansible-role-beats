@@ -1,12 +1,5 @@
 ---
 - hosts: all
-  pre_tasks:
-    - name: Create kibana index
-      uri:
-        url: "{{ beats_client_kibana_url }}"
-        method: PUT
-      changed_when: false
-      ignore_errors: yes
   roles:
     - role: ansible-role-beats
   vars:
