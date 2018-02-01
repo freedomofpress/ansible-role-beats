@@ -118,9 +118,20 @@ beats_client_heartbeat_config: {}
 
 #### KIBANA ##################################################################
 
-# Default dashboard export only works in this role with the 5.x series
-# for 6.x you can now export through the respective config files directly
-beats_client_kibana_export: no
+# Section more for testing at this point. Previously for <=5.x this role was
+# assisting with dashboard import. Now that the feature is integrated into the
+# 6.x+ clients and is not backwards compat. - decided to just rip out the old
+# functionality.
+
+# Here how it might look now
+#    beats_client_filebeat_setup:
+#      dashboards:
+#        enabled: true
+#        index: "{{ beats_client_kibana_indices['filebeat'] }}"
+#    beats_client_metricbeat_setup:
+#      dashboards:
+#        enabled: true
+#        index: "{{ beats_client_kibana_indices['metricbeat'] }}"
 
 beats_client_kibana_url_base: http://localhost:9200
 beats_client_kibana_url: "{{ beats_client_kibana_url_base }}/.kibana"
@@ -130,9 +141,6 @@ beats_client_kibana_indices:
 beats_client_kibana_dash_search:
   metricbeat: Metricbeat*
   filebeat: Filebeat*
-# Only applicable to beats <5.x you can now setup the dashboards
-# via configuration setup.dashboards per client.
-beats_client_kibana_export_parameters: "-only-dashboards -es {{beats_client_kibana_url_base}}"
 
 #### SHARED ##################################################################
 

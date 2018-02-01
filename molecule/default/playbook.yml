@@ -11,5 +11,3 @@
     - role: ansible-role-beats
   vars:
     beats_client_logserver: logstash-server
-    beats_client_kibana_url_base: http://esserver:9200
-    beats_client_kibana_export: yes
