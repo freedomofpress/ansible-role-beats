@@ -74,7 +74,7 @@ beats_client_filebeat_config:
   logging: "{{ beats_client_filebeat_logging }}"
   setup: "{{ beats_client_filebeat_setup }}"
   # https://www.elastic.co/guide/en/beats/filebeat/master/configuration-general-options.html#_literal_name_literal
-  name:  "{{ beats_client_shipper_name|default(ansible_hostname) }}"
+  name: "{{ beats_client_shipper_name|default(ansible_hostname) }}"
 
 #### METRICBEAT ##################################################################
 # See: www.elastic.co/guide/en/beats/metricbeat/master/metricbeat-configuration-options.html
@@ -111,7 +111,7 @@ beats_client_metricbeat_config:
   logging: "{{ beats_client_metricbeat_logging }}"
   setup: "{{ beats_client_metricbeat_setup }}"
   # https://www.elastic.co/guide/en/beats/filebeat/master/configuration-general-options.html#_literal_name_literal
-  name:  "{{ beats_client_shipper_name|default(ansible_hostname) }}"
+  name: "{{ beats_client_shipper_name|default(ansible_hostname) }}"
 
 #### PACKETBEAT ##################################################################
 # See: www.elastic.co/guide/en/beats/packetbeat/master/configuring-packetbeat.html
