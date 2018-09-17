@@ -8,7 +8,7 @@ lint:
   options:
     config-file: molecule/lint.yml
 platforms:
-  - name: debian_jessie
+  - name: beats_debian_jessie
     image: quay.io/freedomofpress/debian-jessie-systemd
     command: /lib/systemd/systemd
     capabilities:
