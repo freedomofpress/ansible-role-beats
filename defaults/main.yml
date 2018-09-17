@@ -8,6 +8,9 @@ beats_client_beats_packages:
   - filebeat
   - metricbeat
 
+# Identifier for host sending logs. Sane default as hostname.
+beats_client_shipper_name: "{{ ansible_hostname }}"
+
 beats_client_version: 6.1.2
 # The apt repo URL pegs minor versions (e.g. 5.x) to avoid unexpected upgrades
 beats_client_major_version_abbreviated: 6.x
@@ -73,6 +76,8 @@ beats_client_filebeat_config:
   output: "{{ beats_client_output }}"
   logging: "{{ beats_client_filebeat_logging }}"
   setup: "{{ beats_client_filebeat_setup }}"
+  # https://www.elastic.co/guide/en/beats/filebeat/master/configuration-general-options.html#_literal_name_literal
+  name: "{{ beats_client_shipper_name }}"
 
 #### METRICBEAT ##################################################################
 # See: www.elastic.co/guide/en/beats/metricbeat/master/metricbeat-configuration-options.html
@@ -108,6 +113,8 @@ beats_client_metricbeat_config:
   output: "{{ beats_client_output }}"
   logging: "{{ beats_client_metricbeat_logging }}"
   setup: "{{ beats_client_metricbeat_setup }}"
+  # https://www.elastic.co/guide/en/beats/filebeat/master/configuration-general-options.html#_literal_name_literal
+  name: "{{ beats_client_shipper_name }}"
 
 #### PACKETBEAT ##################################################################
 # See: www.elastic.co/guide/en/beats/packetbeat/master/configuring-packetbeat.html
