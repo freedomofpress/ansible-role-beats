@@ -25,6 +25,10 @@ beats_client_keyserver: pgp.mit.edu
 # Elastic's beats debian repository
 beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated }}/apt stable main"
 
+# Whether to inject templates (should really only be run on the same system that
+# has direct elasticsearch access
+beats_client_inject_templates: no
+
 #### FILEBEAT ##################################################################
 
 
