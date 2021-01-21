@@ -76,7 +76,7 @@ beats_client_filebeat_logging:
     keepfiles: 2
 
 beats_client_filebeat_config:
-  filebeat.prospectors: "{{ beats_client_filebeat_combined_logfiles }}"
+  filebeat.inputs: "{{ beats_client_filebeat_combined_logfiles }}"
   output: "{{ beats_client_output }}"
   logging: "{{ beats_client_filebeat_logging }}"
   setup: "{{ beats_client_filebeat_setup }}"
