@@ -20,7 +20,7 @@ beats_client_beats_prereq:
 
 # Elastic's PGP key for signing their repository
 beats_client_elastic_pgp_key: "46095ACC8548582C1A2699A9D27D666CD88E42B4"
-beats_client_keyserver: pgp.mit.edu
+beats_client_elastic_gpg_key_url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
 # Elastic's beats debian repository
 beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated }}/apt stable main"

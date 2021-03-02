@@ -2,7 +2,7 @@
 - name: Add ElasticSearch apt key.
   apt_key:
     id: "{{ beats_client_elastic_pgp_key }}"
-    keyserver: "{{ beats_client_keyserver }}"
+    url: "{{ beats_client_elastic_gpg_key_url }}"
     state: present
 
 - name: Install beats pre-req software
