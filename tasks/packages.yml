@@ -19,4 +19,5 @@
   apt:
     name: "{{ item }}={{ beats_client_version }}"
     state: present
+    allow_downgrade: yes
   with_items: "{{ beats_client_beats_packages }}"
