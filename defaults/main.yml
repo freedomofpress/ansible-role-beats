@@ -39,12 +39,23 @@ beats_client_port: 5000
 # Controls how often Topbeat reports stats (in seconds)
 beats_client_topbeat_period: 10
 
-beats_client_logfiles:
+beats_client_uses_rsyslogd: true
+# When the above is true, the below is added to the logfiles to monitor
+# (instead of the journald version)
+beats_client_logfiles_rsyslogd:
   - paths:
       - /var/log/syslog
       - /var/log/auth.log
     tags: ['syslog']
 
+beats_client_uses_journald: false
+# When the above is true, the below is added to the logfiles to monitor
+# (instead of the rsyslogd version)
+beats_client_logfiles_journald:
+  - type: journald
+    tags: ['syslog']
+
+beats_client_logfiles:
   - paths:
       - /var/log/dpkg.log
     tags: ['dpkg']
@@ -65,6 +76,8 @@ beats_client_logfiles:
 beats_client_extra_logfiles: []
 
 beats_client_filebeat_combined_logfiles: "{{ beats_client_logfiles + beats_client_extra_logfiles }}"
+beats_client_filebeat_combined_logfiles_rsyslogd: "{{ beats_client_logfiles_rsyslogd + beats_client_filebeat_combined_logfiles }}"
+beats_client_filebeat_combined_logfiles_journald: "{{ beats_client_logfiles_journald + beats_client_filebeat_combined_logfiles }}"
 
 beats_client_filebeat_logging:
   level: warning
@@ -76,7 +89,7 @@ beats_client_filebeat_logging:
     keepfiles: 2
 
 beats_client_filebeat_config:
-  filebeat.inputs: "{{ beats_client_filebeat_combined_logfiles }}"
+  filebeat.inputs: "{{ beats_client_filebeat_combined_logfiles_journald if beats_client_uses_journald else beats_client_filebeat_combined_logfiles_rsyslogd }}"
   output: "{{ beats_client_output }}"
   logging: "{{ beats_client_filebeat_logging }}"
   setup: "{{ beats_client_filebeat_setup }}"
