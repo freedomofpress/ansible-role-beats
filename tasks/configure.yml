@@ -1,7 +1,7 @@
 ---
 - name: Copy beat configuration
   become: yes
-  copy:
+  ansible.builtin.copy:
     content: "{{ beats_clients_configs[item] | to_nice_yaml }}"
     dest: "/etc/{{ item }}/{{ item }}.yml"
     mode: "0644"
@@ -12,14 +12,14 @@
 
 - name: Enable beat service
   become: yes
-  service:
+  ansible.builtin.service:
     name: "{{ item }}"
     state: started
     enabled: yes
   with_items: "{{ beats_client_beats_packages }}"
 
 - name: Load default templates into elasticsearch
-  command: |
+  ansible.builtin.command: |
     {{ item }} setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'
   with_items: "{{ beats_client_beats_packages }}"
   when: beats_client_inject_templates
