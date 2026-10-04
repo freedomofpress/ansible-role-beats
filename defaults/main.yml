@@ -9,7 +9,7 @@ beats_client_beats_packages:
   - metricbeat
 
 # Identifier for host sending logs. Sane default as hostname.
-beats_client_shipper_name: "{{ ansible_hostname }}"
+beats_client_shipper_name: "{{ ansible_facts['hostname'] }}"
 
 beats_client_version: 6.1.2
 # The apt repo URL pegs minor versions (e.g. 5.x) to avoid unexpected upgrades
